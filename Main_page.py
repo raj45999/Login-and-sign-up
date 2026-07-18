@@ -25,6 +25,7 @@ try:
         data= json.load(file)
         customer_id=len(data)+1
 except:
+    #if there is no prior data then except block will create a list for user inputs
     customer_id=1
     data=[]
 
@@ -42,9 +43,10 @@ if Login_or_signup==1 or 2:
         login_email=input("Enter email: ")#asking for email
         for i in data:#checking every for email matching by user's giver email
                 if login_email==i["email"]:
+                    #if email not found (found will be always be false hence code will not go further)
                     found=True
-                    #asking for password
                     n=3
+                    #asking for password
                     while True:#while loop for 3 attempts
                         if n==0:#if all attempts are over
                             print("Too many failed attempts. Try again later.")
