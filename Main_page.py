@@ -1,5 +1,6 @@
 #importing json for file amanagement
 import json
+import re
 
 #making a class for storing details
 class details:
@@ -8,6 +9,12 @@ class details:
         self.customer_id=int(customer_id)
         self.email=email
         self.password=password
+
+
+    def show(self):
+        for i in self.__dict__:
+            print(f"{i} : {self.__dict__[i]}")
+
 
 
 
@@ -36,13 +43,14 @@ print("---------------------------------")
 #login and signup options
 Login_or_signup = int(input("Enter 1 for login or 2 for signup: "))
 
-if Login_or_signup==1 or 2:
+if Login_or_signup==1 or Login_or_signup==2:
     #if user choose for login
     found=False
     if Login_or_signup == 1:
         login_email=input("Enter email: ")#asking for email
         for i in data:#checking every for email matching by user's giver email
                 if login_email==i["email"]:
+                    self=details(**i)
                     #if email not found (found will be always be false hence code will not go further)
                     found=True
                     n=3
@@ -58,6 +66,7 @@ if Login_or_signup==1 or 2:
                         if i['password']==login_password:
                             #if password matches
                             print("Login Successfully")
+                            self.show()
                             break
 
                         #if passowrd doesnt match
@@ -76,10 +85,18 @@ if Login_or_signup==1 or 2:
     if Login_or_signup==2:
         #if new user appears and choose for signup
         name=input("Enter name: ")
-        email=input("Enter email: ")
         password=input("Enter password: ")
+        while True:
+            email=input("Enter email: ")
+            if re.search("@",email):
+                break
+            else:
+                print("Invalid email!!")
+                continue
         customer=details(name,email,password,customer_id)
         data.append(customer.__dict__)
+
+            
 
         with open(file_name,"w") as fh:
             json.dump(data, fh, indent = 4)

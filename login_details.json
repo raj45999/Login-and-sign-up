@@ -4,5 +4,11 @@
         "customer_id": 1,
         "email": "raj@gmail.com",
         "password": "123"
+    },
+    {
+        "name": "naman",
+        "customer_id": 2,
+        "email": "ugsdsd@gmail.com",
+        "password": "123"
     }
 ]
